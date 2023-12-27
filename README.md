@@ -13,3 +13,15 @@ Any code added to this module _MUST_ be extremely thoroughly tested with unit te
 
 ## Features
 - `@Synchronized` property annotation, to allow safe access to properties. Simimlar to Objective-C `atomic` properties.
+```swift
+// Simple example of usage.
+class MyClass {
+  @Synchronized private var arrayContent = [String]()
+
+  func threadSafeAddToArray(_ content: String) {
+    $arrayContent.synchronized { array in
+      array.append(content)
+    }
+  }
+}
+```
