@@ -9,13 +9,15 @@ import Foundation
 
 /// @Synchronized guarantees thread-safety for concurrent accesses to a property.
 /// For class types, you should _not_ mutate a property that is guarded by synchronized directly - instead use the `.synchronized { }` function.
-/// - Structs may be modified directly.
+/// Structs may be modified directly.
 ///
 /// Good examples:
 ///    - `myDict[25_01_2021] = "Blobiverse"`
 ///    - `$classType.synchronized { $0.perform("string") }`
+///
 /// Bad examples:
 ///   - `classType.perform("string")`   Should NOT attempt to mutate non-atomically.
+///
 /// Structs won't let you do it anyway, but classes will—and may behave unexpectedly.
 ///
 @propertyWrapper
