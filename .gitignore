@@ -5,8 +5,8 @@
 ## Mac files
 .DS_Store
 
-## Swift Package
-.swiftpm/
+## Swift Packag XCUserDatae
+.swiftpm/xcode/xcuserdata
 
 ## User settings
 xcuserdata/
