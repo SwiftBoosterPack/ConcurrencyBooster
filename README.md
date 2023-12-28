@@ -9,10 +9,29 @@ Explicitly has `SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;` (`-enforce-exclusivity=un
 Any code added to this module _MUST_ be extremely thoroughly tested with unit tests and validated for concurrency safety.
 
 ## Extensions
-- `synchronized` for accessing contents with locks, allowing for linear code flow as opposed to needing to maintain locking states.
+### `synchronized` for locks
+For accessing contents with locks, allowing for linear code flow as opposed to needing to maintain locking states.
+Before:
+```swift
+let lock = NSRecursiveLock()
+let capturedValue: String
+lock.lock()
+executeSomeWork()
+capturedValue = doSomeMoreWork()
+lock.unlock()
+```
+After:
+```swift
+let lock = NSRecursiveLock()
+let capturedValue = lock.synchronized {
+   executeSomeWork()
+   return doSomeMoreWork()
+}
+```
 
 ## Features
-- `@Synchronized` property annotation, to allow safe access to properties. Simimlar to Objective-C `atomic` properties.
+### `@Synchronized` property annotation
+Allow safe access to properties. Simimlar to Objective-C `atomic` properties.
 ```swift
 // Simple example of usage.
 class MyClass {
